@@ -1,0 +1,24 @@
+server:
+  port: 7088
+
+spring:
+  application:
+    name: admin-server
+  mail:
+    host: smtp.qq.com
+  boot:
+    admin:
+      notify:
+        mail:
+          to: 287681643@qq.com
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.126.128:8761/eureka/
+
+#endpoints.health.sensitive=true
+#eureka.instance.leaseRenewalIntervalInSeconds=5
+info:
+  description: @project.description@
+  version: @project.version@
