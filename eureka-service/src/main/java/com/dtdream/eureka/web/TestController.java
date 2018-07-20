@@ -1,4 +1,4 @@
-package com.dtdream.eureka.controller;
+package com.dtdream.eureka.web;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;

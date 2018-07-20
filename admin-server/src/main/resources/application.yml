@@ -1,9 +1,12 @@
 server:
-  port: 7088
+  port: 8788
 
 spring:
   application:
     name: admin-server
+  profiles:
+    active:
+      - secure
   mail:
     host: smtp.qq.com
   boot:
@@ -11,14 +14,43 @@ spring:
       notify:
         mail:
           to: 287681643@qq.com
+info:
+  app:
+    name: "@project.name@"
+    description: "@project.description@"
+    version: "@project.version@"
 
 eureka:
+  instance:
+      prefer-ip-address: true
+      lease-renewal-interval-in-seconds: 10
+      health-check-url-path: /actuator/health
   client:
+    registry-fetch-interval-seconds: 5
+    registerWithEureka: false
+    fetchRegistry: false
     serviceUrl:
-      defaultZone: http://192.168.126.128:8761/eureka/
+      # 向每个注册中心注册
+      defaultZone: http://peer1:8761/eureka/,http://peer2:8769/eureka/
+      #defaultZone: http://192.168.126.128:8761/eureka/
 
-#endpoints.health.sensitive=true
-#eureka.instance.leaseRenewalIntervalInSeconds=5
-info:
-  description: @project.description@
-  version: @project.version@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+---
+spring:
+  profiles: insecure
+
+---
+spring:
+  profiles: secure
+  security:
+    user:
+      name: "user"
+      password: "password"

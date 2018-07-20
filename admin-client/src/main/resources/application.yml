@@ -9,6 +9,13 @@ spring:
       client:
         url: http://localhost:8788
 
+eureka:
+  client:
+    serviceUrl:
+       # 向每个注册中心注册
+      defaultZone: http://peer1:8761/eureka/,http://peer2:8769/eureka/
+      #defaultZone: http://192.168.126.128:8761/eureka/
+
 management:
   endpoints:
     web:

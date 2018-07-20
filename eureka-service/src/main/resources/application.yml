@@ -1,10 +1,32 @@
-eureka:
-  client:
-    serviceUrl:
-      #defaultZone: http://peer1:8761/eureka/,http://peer2:8769/eureka/
-      defaultZone: http://192.168.126.128:8761/eureka/
 server:
   port: 8762
+
 spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:8788
   application:
     name: service-hi
+
+eureka:
+  instance:
+    appname: service-hi
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 1
+#    health-check-url-path: /actuator/health
+    lease-expiration-duration-in-seconds: 2
+  client:
+    serviceUrl:
+       # 向每个注册中心注册
+      defaultZone: http://peer1:8761/eureka/,http://peer2:8769/eureka/
+      #defaultZone: http://192.168.126.128:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+      health:
+        show-details: ALWAYS

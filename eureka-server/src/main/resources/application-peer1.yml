@@ -3,9 +3,22 @@ server:
 
 spring:
   profiles: peer1
+
 eureka:
   instance:
     hostname: peer1
+    lease-renewal-interval-in-seconds: 30
+    secure-health-check-url: /actuator/health
   client:
+    registry-fetch-interval-seconds: 30
     serviceUrl:
       defaultZone: http://peer2:8769/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+      health:
+        show-details: ALWAYS

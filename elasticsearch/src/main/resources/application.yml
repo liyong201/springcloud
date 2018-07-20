@@ -1,0 +1,5 @@
+spring:
+    data:
+        elasticsearch:
+            #cluster-nodes: 10.158.192.8:22:9200
+
